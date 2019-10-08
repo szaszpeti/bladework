@@ -42,4 +42,4 @@ class DamageCreateView(CreateView):
     model = Damage
     template_name = "getdamage.html"
     fields = '__all__'
-    success_url = reverse_lazy('bladework:damage')
+    success_url = reverse_lazy('bladework:home')

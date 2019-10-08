@@ -30,7 +30,6 @@ class Damage(models.Model):
     blade = models.CharField(max_length=20)
     finding = models.CharField(max_length=20)
     ps_ss_le_te = models.CharField(max_length=10, null=True)
-    email = models.EmailField(max_length=60)
     damage_type = models.CharField(max_length=60)
     category = models.CharField(max_length=60)
     length = models.CharField(max_length=60)
