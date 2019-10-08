@@ -133,7 +133,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #how we goint to access the directory
 MEDIA_URL = '/media/'
 
-# LOGIN_REDIRECT_URL = "onsite:home"
+LOGIN_REDIRECT_URL = "bladework:home"
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #
