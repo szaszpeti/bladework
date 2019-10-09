@@ -42,4 +42,13 @@ class DamageCreateView(CreateView):
     model = Damage
     template_name = "getdamage.html"
     fields = '__all__'
-    success_url = reverse_lazy('bladework:home')
+    success_url = reverse_lazy('bladework:take_photo')
+
+
+class PhotoView(TemplateView):
+    # model = Meditater
+    template_name = "takephoto.html"
+    #
+    # def meditaters(self):
+    #     return Meditater.objects.all()
+    #!!!!USE "VIEW.MEDITATERS" on the template

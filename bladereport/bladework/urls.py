@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from .views import (HomeView, TurbineCreateView, DamageCreateView)
+from .views import (HomeView, TurbineCreateView, DamageCreateView, PhotoView)
 
 app_name = 'bladework'
 
@@ -8,6 +8,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('getturbinedata', TurbineCreateView.as_view(), name='get_turbine_data'),
     path('getdamage', DamageCreateView.as_view(), name='damage'),
+    path('takephoto', PhotoView.as_view(), name='take_photo')
     # path('list/', MeditaterListView.as_view(), name='meditater_list'),
     # path('detail/<int:pk>/', MeditaterDetailView.as_view(), name='meditater_detail'),
     # path('delete/<int:pk>/', MeditaterDeleteView.as_view(), name='meditater_delete'),
