@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Turbine List View ({{object_list|length}})</h1>
+    <br>
+    <br>
+
+
+    <form method="GET" action="{% url 'bladework:find_index'%}">
+        <div class="input-group">
+        <input class="form-control" type="text" name="q" placeholder="Search post" value=""/>
+        <span class="input-group-btn">
+            <input class="btn btn-default" type="submit" value="Search"/>
+
+            </span>
+    </div>
+
+
+
+
+</form>
+<br>
+    <br>
+
+<br>
+    <br>
+ <table class="table">
+    <thead>
+      <tr>
+        <th>Turbine Number</th>
+        <th>Wind Farm</th>
+        <th>Customer</th>
+          <th>Technician</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    {% for turbine in object_list %}
+    {% if turbine.wtg_number%}
+      <tr>
+        <td><a href="{{turbine.get_absolut_url}}"> {{turbine.wtg_number}}</td>
+        <td>{{turbine.windfarm}}</td>
+           <td>{{turbine.customer}}</td>
+           <td>{{turbine.name_of_technicians}}</td>
+
+      </tr>
+    {% endif %}
+    {% endfor %}
+
+
+    </tbody>
+  </table>
+    <!--<ol>-->
+        <!--{% for meditater in object_list %}-->
+        <!--<li><a href="{{meditater.get_absolut_url}}"> {{meditater.name}} - {{ meditater.state }}</a></li>-->
+        <!--{% endfor %}-->
+
+    <!--</ol>-->
+
+
+</div>
+{% endblock %}

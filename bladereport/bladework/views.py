@@ -52,3 +52,56 @@ class PhotoView(TemplateView):
     # def meditaters(self):
     #     return Meditater.objects.all()
     #!!!!USE "VIEW.MEDITATERS" on the template
+
+class TurbineListView(LoginRequiredMixin, ListView):
+    model = Turbine
+    ordering = ["wtg_number"]
+    template_name = "turbinelist_view.html"
+    #context_object_name = 'post'#
+
+class TurbineDeleteView(LoginRequiredMixin, DeleteView):
+    model = Turbine
+    template_name = "turbine_delete.html"
+    success_url = reverse_lazy('bladework:turbine_list_view')
+
+class TurbineDetailView(LoginRequiredMixin, DetailView):
+    model = Turbine
+    template_name = "turbine_detail.html"
+
+class TurbineUpdateView(LoginRequiredMixin, UpdateView):
+    model = Turbine
+    template_name = "turbine_edit.html"
+    fields = '__all__'
+    success_url = reverse_lazy('bladework:turbine_list_view')
+
+def find_index(request):
+    print ("THis is the request from find", request)
+    queryset_list = Turbine.objects.all().order_by("wtg_number")
+
+
+    query = request.GET.get("q")
+    print (query)
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(wtg_number__icontains=query) |
+            Q(windfarm__icontains=query) |
+            Q(name_of_technicians__icontains=query)
+
+
+        ).distinct()
+        number_found = len(queryset_list)
+
+        return render(request, 'query_result.html', {'queryset': queryset_list, "query":query, "number":number_found})
+
+
+def photo_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = DocumentForm()
+    return render(request, 'core/model_form_upload.html', {
+        'form': form
+    })

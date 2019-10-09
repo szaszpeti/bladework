@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Turbine Detail View</h1> <br>
+    <h3>{{turbine.wtg_number}}</h3>
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th>WTG Model</th>
+           <th>Customer</th>
+        <th>Hub Heigth</th>
+           <th>Turbin KwH</th>
+          <th>Turbin Work Hours</th>
+           <th>Blade type</th>
+          <th>Set Number</th>
+          <th>Blade A</th>
+          <th>Blade B</th>
+          <th>Blade C</th>
+          <th>Name of Technicians</th>
+            <th>Date of Inspection</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+          <td>{{turbine.wtg_model}}</td>
+           <td>{{turbine.customer}}</td>
+           <td>{{turbine.hub_heigth}}</td>
+           <td>{{turbine.kwh}}</td>
+          <td>{{turbine.turbine_work_hours}}</td>
+           <td>{{turbine.blade_type}}</td>
+           <td>{{turbine.set_number}}</td>
+           <td>{{turbine.blade_a_number}}</td>
+          <td>{{turbine.blade_b_number}}</td>
+          <td>{{turbine.blade_c_number}}</td>
+          <td>{{turbine.name_of_technicians}}</td>
+          <td>{{turbine.inspection_period }}</td>
+
+      </tr>
+
+
+
+    </tbody>
+  </table>
+  </div>
+
+    <br>
+
+    <a class="btn btn-danger" href="{{turbine.get_delete_url}}">Delete</a>
+    <a class="btn btn-info" href="{% url 'bladework:turbine_edit' pk=object.pk%}">Edit</a>
+    <a class="btn btn-info" href="{% url 'bladework:turbine_list_view'%}">ListView</a>
+
+
+
+</div>
+{% endblock %}
