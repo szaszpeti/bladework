@@ -1,19 +1,25 @@
 from django.urls import path, include
 from . import views
-from .views import (HomeView, TurbineCreateView, DamageCreateView, PhotoView,TurbineListView, TurbineDeleteView, TurbineDetailView,TurbineUpdateView)
+from .views import (HomeView, TurbineCreateView, BladeDetailView, BladeDeleteView, DamageDeleteView, BladeCreateView, DamageCreateView, BladeUpdateView, DamageUpdateView, PhotoView,TurbineListView, TurbineDeleteView, TurbineDetailView,TurbineUpdateView)
 
 app_name = 'bladework'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('getturbinedata', TurbineCreateView.as_view(), name='get_turbine_data'),
-    path('getdamage', DamageCreateView.as_view(), name='damage'),
+    path('getdamage', DamageCreateView.as_view(), name='damage_create'),
+    path('getblade', BladeCreateView.as_view(), name='blade_create'),
     path('takephoto', PhotoView.as_view(), name='take_photo'),
     path('turbinelist', TurbineListView.as_view(), name='turbine_list_view'),
     # path('list/', MeditaterListView.as_view(), name='meditater_list'),
     path('detail/<int:pk>/', TurbineDetailView.as_view(), name='turbine_detail'),
+    path('bladedetail/<int:pk>/', BladeDetailView.as_view(), name='blade_detail'),
     path('delete/<int:pk>/', TurbineDeleteView.as_view(), name='turbine_delete'),
+    path('bladedelete/<int:pk>/', BladeDeleteView.as_view(), name='blade_delete'),
+    path('damagedelete/<int:pk>/', DamageDeleteView.as_view(), name='damage_delete'),
     path('edit/<int:pk>/', TurbineUpdateView.as_view(), name='turbine_edit'),
+    path('damageedit/<int:pk>/', DamageUpdateView.as_view(), name='damage_edit'),
+    path('bladeedit/<int:pk>/', BladeUpdateView.as_view(), name='blade_edit'),
     # path('create/', MeditaterCreateView.as_view(), name='meditater_create'),
     path('find_index/', views.find_index, name='find_index'),
     path('photo_upload/', views.photo_upload, name='photo_upload'),

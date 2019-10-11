@@ -1,10 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Blade Detail View</h1> <br>
+    <h3>{{blade.blade_number}} - {{blade.blade}}</h3>
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Blade</th>
+           <th>Blade Number</th>
+        <th>Inspection Time</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+          <td>{{blade.blade}}</td>
+           <td>{{blade.blade_number}}</td>
+           <td>{{blade.inspection_time}}</td>
+
+      </tr>
+
+
+
+    </tbody>
+  </table>
+
+    <a class="btn btn-danger" href="{{blade.get_delete_url}}">Delete</a>
+    <a class="btn btn-info" href="{% url 'bladework:blade_edit' pk=object.pk%}">Edit</a>
+    <a class="btn btn-info" href="{% url 'bladework:turbine_list_view'%}">ListView</a>
+
+  </div>
+
+<br>
+<br>
+<div class="jumbotron">
+<div class="container">
+
+  <h3>Damages</h3>
+
+{% for damage in blade.damage_set.all %}
+    <table class="table table-dark">
+    <thead>
+      <tr>
+          <th>Damage Number</th>
+        <th>Damage Type</th>
+           <th>Position</th>
+        <th>Distance from</th>
+           <th>Category</th>
+          <th>Length</th>
+           <th>Width</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+            <td>{{damage.id}}</td>
+          <td>{{damage.damage_type}}</td>
+           <td>{{damage.position}}</td>
+           <td>{{damage.distance_from}}</td>
+           <td>{{damage.category}}</td>
+          <td>{{damage.length}}</td>
+           <td>{{damage.width}}</td>
+
+      </tr>
+
+
+
+    </tbody>
+
+  </table>
+    <a class="btn btn-info" href="{% url 'bladework:damage_create'%}">Add New DAMAGE</a>
+    <a class="btn btn-danger" href="{{damage.get_delete_url}}">Delete</a>
+    <a class="btn btn-info" href="{% url 'bladework:damage_edit' pk=object.pk%}">Edit</a>
+    <a class="btn btn-info" href="{% url 'bladework:turbine_list_view'%}">ListView</a>
+
+    <hr>
+    {% endfor %}
+
+
+    <br>
+
+
+
+
+
+
+</div>
+{% endblock %}
+    </div>

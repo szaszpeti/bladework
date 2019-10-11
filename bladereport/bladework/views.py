@@ -6,8 +6,8 @@ from django.views.generic import (TemplateView,
                                   CreateView,
                                   UpdateView)
 from django.shortcuts import render, get_object_or_404
-from .models import Turbine, Damage
-from .forms import TurbineForm, DamageForm
+from .models import Turbine, Damage, Blade
+from .forms import TurbineForm, DamageForm, BladeForm
 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -36,13 +36,20 @@ class TurbineCreateView(CreateView):
     model = Turbine
     template_name = "getturbinedata.html"
     fields = '__all__'
-    success_url = reverse_lazy('bladework:damage')
+    success_url = reverse_lazy('bladework:blade_create')
 
 class DamageCreateView(CreateView):
     model = Damage
     template_name = "getdamage.html"
     fields = '__all__'
     success_url = reverse_lazy('bladework:take_photo')
+
+class BladeCreateView(CreateView):
+    model = Blade
+    template_name = "blade_create.html"
+    fields = '__all__'
+    success_url = reverse_lazy('bladework:damage_create')
+
 
 
 class PhotoView(TemplateView):
@@ -64,13 +71,39 @@ class TurbineDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "turbine_delete.html"
     success_url = reverse_lazy('bladework:turbine_list_view')
 
+class BladeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Blade
+    template_name = "blade_delete.html"
+    success_url = reverse_lazy('bladework:turbine_list_view')
+
+class DamageDeleteView(LoginRequiredMixin, DeleteView):
+    model = Damage
+    template_name = "damage_delete.html"
+    success_url = reverse_lazy('bladework:turbine_list_view')
+
 class TurbineDetailView(LoginRequiredMixin, DetailView):
     model = Turbine
     template_name = "turbine_detail.html"
 
+class BladeDetailView(LoginRequiredMixin, DetailView):
+    model = Blade
+    template_name = "blade_detail.html"
+
 class TurbineUpdateView(LoginRequiredMixin, UpdateView):
     model = Turbine
     template_name = "turbine_edit.html"
+    fields = '__all__'
+    success_url = reverse_lazy('bladework:turbine_list_view')
+
+class BladeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Blade
+    template_name = "blade_edit.html"
+    fields = '__all__'
+    success_url = reverse_lazy('bladework:turbine_list_view')
+
+class DamageUpdateView(LoginRequiredMixin, UpdateView):
+    model = Damage
+    template_name = "damage_edit.html"
     fields = '__all__'
     success_url = reverse_lazy('bladework:turbine_list_view')
 

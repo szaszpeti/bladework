@@ -2,7 +2,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-    <h1>NEW DAMAGE</h1>
+
+
+    <h1>NEW DAMAGE </h1>
 <div class="jumbotron">
 <form method="post">{% csrf_token %}
     {{ form|crispy }}

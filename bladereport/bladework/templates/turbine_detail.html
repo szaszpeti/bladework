@@ -16,10 +16,6 @@
           <th>Turbin Work Hours</th>
            <th>Blade type</th>
           <th>Set Number</th>
-          <th>Blade A</th>
-          <th>Blade B</th>
-          <th>Blade C</th>
-          <th>Name of Technicians</th>
             <th>Date of Inspection</th>
       </tr>
     </thead>
@@ -33,10 +29,6 @@
           <td>{{turbine.turbine_work_hours}}</td>
            <td>{{turbine.blade_type}}</td>
            <td>{{turbine.set_number}}</td>
-           <td>{{turbine.blade_a_number}}</td>
-          <td>{{turbine.blade_b_number}}</td>
-          <td>{{turbine.blade_c_number}}</td>
-          <td>{{turbine.name_of_technicians}}</td>
           <td>{{turbine.inspection_period }}</td>
 
       </tr>
@@ -47,11 +39,52 @@
   </table>
   </div>
 
+
+
+<div class="container">
+    {% for blade in turbine.blade_set.all %}
+    <h3>Blade - {{blade.blade}} - <a href="{{blade.get_absolut_url}}">{{blade.blade_number}}</a> </h3>
+
     <br>
+
+{% for damage in blade.damage_set.all %}
+    <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Damage Type</th>
+           <th>Position</th>
+        <th>Distance from</th>
+           <th>Category</th>
+          <th>Length</th>
+           <th>Width</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+          <td>{{damage.damage_type}}</td>
+           <td>{{damage.position}}</td>
+           <td>{{damage.distance_from}}</td>
+           <td>{{damage.category}}</td>
+          <td>{{damage.length}}</td>
+           <td>{{damage.width}}</td>
+
+      </tr>
+
+
+
+    </tbody>
+        {% endfor %}
+  </table>
+<hr>
+    {% endfor %}
+    <br>
+
 
     <a class="btn btn-danger" href="{{turbine.get_delete_url}}">Delete</a>
     <a class="btn btn-info" href="{% url 'bladework:turbine_edit' pk=object.pk%}">Edit</a>
     <a class="btn btn-info" href="{% url 'bladework:turbine_list_view'%}">ListView</a>
+    <a class="btn btn-danger" href="{% url 'bladework:blade_create'%}">ADD NEW BLADE</a>
 
 
 

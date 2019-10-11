@@ -1,4 +1,4 @@
-from bladework.models import Turbine, Damage
+from bladework.models import Turbine, Damage, Blade
 from django.forms import ModelForm
 from django import forms
 
@@ -22,3 +22,9 @@ class DamageForm(forms.ModelForm):
         #     "text": forms.Textarea(attrs={"class": "editable medium-editor-textarea postcontent"})
         #
         # }
+
+class BladeForm(forms.ModelForm):
+
+    class Meta():
+        model = Blade
+        fields = "__all__"
